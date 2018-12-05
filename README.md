@@ -1,4 +1,4 @@
-# env-repl [![Clojars Project](http://clojars.org/worldsingles/ws-commons/latest-version.svg)](http://clojars.org/worldsingles/ws-commons)
+# ws-commons [![Clojars Project](http://clojars.org/worldsingles/ws-commons/latest-version.svg)](http://clojars.org/worldsingles/ws-commons)
 
 Common utility functions and "extensions" to Clojure.
 
