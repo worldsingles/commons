@@ -25,7 +25,7 @@
     <connection>scm:git:git@github.com:worldsingles/commons.git</connection>
     <developerConnection>scm:git:git@github.com:worldsingles/commons.git</developerConnection>
     <url>https://github.com/worldsingles/commons</url>
-    <tag>580681c84c641704dcc1e6f8a8bd0c1f910c5e42</tag>
+    <tag>3539ce43a25120ed148571b125edd6697b58e8b4</tag>
   </scm>
 
   <dependencies>
