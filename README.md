@@ -31,8 +31,7 @@ In addition, some syntactic sugar for `java.util.concurrent.CompletableFuture`:
 
 
 ``` clojure
-user=> (require '[ws.clojure.extensions
-                  :refer [condp-> condp->> condq dissoc-all flip interleave-all]])
+user=> (require '[ws.clojure.extensions :refer :all])
 nil
 user=> (defn f [n]
          (condp-> n
