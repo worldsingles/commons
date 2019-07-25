@@ -1,4 +1,4 @@
-# ws-commons [![Clojars Project](http://clojars.org/worldsingles/ws-commons/latest-version.svg)](http://clojars.org/worldsingles/ws-commons)
+# ws-commons [![Clojars Project](http://clojars.org/worldsingles/ws-commons/latest-version.svg)](http://clojars.org/worldsingles/ws-commons) [![cljdoc badge](https://cljdoc.org/badge/worldsingles/ws-commons)](https://cljdoc.org/d/worldsingles/ws-commons/CURRENT)
 
 Common utility functions and "extensions" to Clojure.
 
