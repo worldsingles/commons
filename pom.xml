@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>worldsingles</groupId>
   <artifactId>ws-commons</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.2</version>
   <name>ws-commons</name>
 
   <description>Common utility functions and "extensions" to Clojure.</description>

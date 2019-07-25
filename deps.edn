@@ -2,7 +2,7 @@
  :aliases
  {:test
   {:extra-paths ["test"]
-   :extra-deps {expectations {:mvn/version "RELEASE"}
+   :extra-deps {expectations/clojure-test {:mvn/version "RELEASE"}
                 org.clojure/test.check {:mvn/version "RELEASE"}}}
 
   :runner

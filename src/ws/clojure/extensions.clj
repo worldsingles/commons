@@ -1,4 +1,4 @@
-;; copyright (c) 2017-2018 world singles networks llc
+;; copyright (c) 2017-2019 world singles networks llc
 
 (ns ws.clojure.extensions
   "A small library of useful 'language extensions' -- things are 'like'
@@ -115,3 +115,43 @@
    (lazy-seq
     (let [ss (filter identity (map seq (conj colls c2 c1)))]
       (concat (map first ss) (apply interleave-all (map rest ss)))))))
+
+(defmacro completable
+  "Return a CompletableFuture that will evaluate the body asynchronously.
+
+  Can be deref'd, future-cancel'd, etc. Call then (below) on this to provide
+  a function to call when the future completes."
+  [& body]
+  `(java.util.concurrent.CompletableFuture/supplyAsync
+    (reify java.util.function.Supplier
+      (~'get [_#] ~@body))))
+
+(defmacro then
+  "Given a CompletableFuture and a function, when the future completes,
+  invoke the function on its result."
+  [cf f]
+  `(.thenApply
+    ~cf
+    (reify java.util.function.Function
+      (~'apply [_# v#] (~f v#)))))
+
+(defmacro exceptionally
+  "Given a CompletableFuture and a function, if the future completes
+  with an exception, invoke the function on that exception."
+  [cf f]
+  `(.exceptionally
+    ~cf
+    (reify java.util.function.Function
+      (~'apply [_# v#] (~f v#)))))
+
+(comment
+  (deref (completable (Thread/sleep 5000) 42)) ; produces 42 after 5 seconds
+  (deref (completable (Thread/sleep 5000) 42) 1000 13) ; produces 13 after 1s
+  (-> (completable (Thread/sleep 5000) 42) ; produces 50/21 after 5 seconds
+      (then #(/ 100 %))
+      (exceptionally ex-message)
+      (deref))
+  (-> (completable (Thread/sleep 5000) 0) ; produce "Divide by zero" after 5s
+      (then #(/ 100 %))
+      (exceptionally ex-message)
+      (deref)))
