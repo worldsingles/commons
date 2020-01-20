@@ -76,6 +76,6 @@ user=>
 
 ## License
 
-Copyright © 2016-2019 [World Singles Networks llc](https://worldsinglesnetworks.com/).
+Copyright © 2016-2020 [World Singles Networks llc](https://worldsinglesnetworks.com/).
 
 Distributed under the Eclipse Public License version 1.0.
