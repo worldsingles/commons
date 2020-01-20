@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>worldsingles</groupId>
   <artifactId>ws-commons</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <name>ws-commons</name>
 
   <description>Common utility functions and "extensions" to Clojure.</description>
@@ -25,7 +25,7 @@
     <connection>scm:git:git@github.com:worldsingles/commons.git</connection>
     <developerConnection>scm:git:git@github.com:worldsingles/commons.git</developerConnection>
     <url>https://github.com/worldsingles/commons</url>
-    <tag>3539ce43a25120ed148571b125edd6697b58e8b4</tag>
+    <tag>v0.1.3</tag>
   </scm>
 
   <dependencies>

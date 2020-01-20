@@ -7,13 +7,13 @@ Common utility functions and "extensions" to Clojure.
 `deps.edn`:
 
 ``` clojure
-clj -Sdeps '{:deps {worldsingles/ws-commons {:mvn/version "0.1.2"}}}'
+clj -Sdeps '{:deps {worldsingles/ws-commons {:mvn/version "0.1.3"}}}'
 ```
 
 Leiningen / Boot Dependency:
 
 ``` clojure
-[worldsingles/ws-commons "0.1.2"]
+[worldsingles/ws-commons "0.1.3"]
 ```
 
 * `condp->` -- an extension to `cond->` that threads the expression through the predicate(s) as well as the result(s).
@@ -70,6 +70,7 @@ user=>
 
 ## Releases
 
+0.1.3 -- Jan 20, 2020 -- adds `local-map`.
 0.1.2 -- Jul 24, 2019 -- adds `completable`, `then`, `exceptionally`.
 0.1.1 -- Dec 05, 2018 -- first public release.
 

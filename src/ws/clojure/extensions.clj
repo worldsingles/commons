@@ -1,4 +1,4 @@
-;; copyright (c) 2017-2019 world singles networks llc
+;; copyright (c) 2017-2020 world singles networks llc
 
 (ns ws.clojure.extensions
   "A small library of useful 'language extensions' -- things are 'like'
@@ -14,7 +14,8 @@
   flip -- a companion to partial that allows the first argument to be
     omitted (rather than the trailing arguments). Inspired by Haskell's flip.
   interleave-all -- an extension to interleave that uses all elements
-    of the longer sequence argument(s).")
+    of the longer sequence argument(s).
+  local-map -- produce a hash map from all, or a subset of, local bindings.")
 
 (defmacro condp->
   "Takes an expression and a set of predicate/form pairs. Threads expr (via ->)
@@ -144,7 +145,39 @@
     (reify java.util.function.Function
       (~'apply [_# v#] (~f v#)))))
 
+(defmacro local-map
+  "Turn all (or a subset of) locals into a hash map with keys named for
+  their symbols (and their values).
+
+  For the subset case, `op` can be `:with` (or `:only`) or `:without`.
+  The latter will use all the local bindings except the named ones; the
+  former will use just the specified locals. `ks` can be bare symbols or
+  keywords or strings.
+
+  Inspired by an example from @noisesmith on Slack."
+  ([]
+   (into {}
+         (map (juxt (comp keyword name) identity))
+         (keys &env)))
+  ([op & ks]
+   (if (= :without op)
+     (into {}
+           (comp (remove (set (map (comp symbol name) ks)))
+                 (map (juxt (comp keyword name) identity)))
+           (keys &env))
+     (into {}
+           (map (juxt (comp keyword name) (comp symbol name)))
+           ks))))
+
 (comment
+  (let [a 1 b 2] (local-map))
+  (let [a 1 b 2] (local-map :only :a))
+  (let [a 1 b 2] (local-map :only "a" b))
+  (let [a 1 b 2] (local-map :without :a))
+  (defn foo [a b] (let [c 1 d (+ a b)] {:all (local-map)
+                                        :a-d (local-map :only :a :d)
+                                        :b-c (local-map :without :a :d)}))
+  (foo 13 42)
   (deref (completable (Thread/sleep 5000) 42)) ; produces 42 after 5 seconds
   (deref (completable (Thread/sleep 5000) 42) 1000 13) ; produces 13 after 1s
   (-> (completable (Thread/sleep 5000) 42) ; produces 50/21 after 5 seconds
