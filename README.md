@@ -70,9 +70,9 @@ user=>
 
 ## Releases
 
-0.1.3 -- Jan 20, 2020 -- adds `local-map`.
-0.1.2 -- Jul 24, 2019 -- adds `completable`, `then`, `exceptionally`.
-0.1.1 -- Dec 05, 2018 -- first public release.
+* 0.1.3 -- Jan 20, 2020 -- adds `local-map`.
+* 0.1.2 -- Jul 24, 2019 -- adds `completable`, `then`, `exceptionally`.
+* 0.1.1 -- Dec 05, 2018 -- first public release.
 
 ## License
 
