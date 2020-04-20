@@ -15,7 +15,11 @@
     omitted (rather than the trailing arguments). Inspired by Haskell's flip.
   interleave-all -- an extension to interleave that uses all elements
     of the longer sequence argument(s).
+  completable, then, exceptionally -- macros providing syntactic sugar over
+    Java's CompletableFuture.
   local-map -- produce a hash map from all, or a subset of, local bindings.")
+
+(set! *warn-on-reflection* true)
 
 (defmacro condp->
   "Takes an expression and a set of predicate/form pairs. Threads expr (via ->)
@@ -170,14 +174,6 @@
            ks))))
 
 (comment
-  (let [a 1 b 2] (local-map))
-  (let [a 1 b 2] (local-map :only :a))
-  (let [a 1 b 2] (local-map :only "a" b))
-  (let [a 1 b 2] (local-map :without :a))
-  (defn foo [a b] (let [c 1 d (+ a b)] {:all (local-map)
-                                        :a-d (local-map :only :a :d)
-                                        :b-c (local-map :without :a :d)}))
-  (foo 13 42)
   (deref (completable (Thread/sleep 5000) 42)) ; produces 42 after 5 seconds
   (deref (completable (Thread/sleep 5000) 42) 1000 13) ; produces 13 after 1s
   (-> (completable (Thread/sleep 5000) 42) ; produces 50/21 after 5 seconds

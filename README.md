@@ -23,16 +23,27 @@ Leiningen / Boot Dependency:
 * `flip` -- a companion to `partial` that allows the first argument to be omitted (rather than the trailing arguments). Inspired by Haskell's `flip`.
 * `interleave-all` -- an extension to `interleave` that uses all elements of the longer sequence argument(s).")
 
+A local binding capturing macro:
+
+* `local-map` -- returns a hash map containing all local symbols (as keyword keys) with their associated values; note that this can include auto-generated locals too!
+
+``` clojure
+```
+
 In addition, some syntactic sugar for `java.util.concurrent.CompletableFuture`:
 
 * `completable` -- like `future` but produces a `CompletableFuture` instead.
 * `exceptionally` -- applied to a `CompletableFuture` and a function, will execute the function on any exception produced by the future.
 * `then` -- applied to a `CompletableFuture` and a function, will execute the function on the result of the future.
 
+## Examples
 
 ``` clojure
 user=> (require '[ws.clojure.extensions :refer :all])
 nil
+
+;; threading examples:
+
 user=> (defn f [n]
          (condp-> n
            even?   (* 3)
@@ -51,6 +62,33 @@ user=> (g 22)
 34 ; (* 3 22) = 66, (> 100 66) = true, (- 100 66) = 34
 user=> (g 66)
 198 ; (* 3 66) = 198, (> 100 198) = false
+
+;; local-map examples:
+
+user=> (let [a 1 b 2] (local-map)))
+{:a 1, :b 2}
+user=> (let [a 1 b 2] (local-map :only :a)))
+{:a 1}
+user=> (let [a 1 b 2] (local-map :only "a" b))
+{:a 1, :b 2}
+user=> (let [a 1 b 2] (local-map :without :a))
+{:b 2}
+user=> (defn foo [a b] ; a and b are also captured
+         (let [c 1 d (+ a b)]
+           {:all (local-map)
+            :a-d (local-map :only :a :d)
+            :b-c (local-map :without :a :d)}))
+#'user/foo            
+user=> (foo 13 42))
+{:all {:a 13, :b 42, :c 1, :d 55}
+ :a-d {:a 13, :d 55}
+ :b-c {:b 42, :c 1}}
+user=> (let [{:keys [a b]} {:a 1, :b 2}] (local-map))
+;; this will include the auto-generated :map# destructuring key as well
+{:map__41744 {:a 1, :b 2}, :a 1, :b 2}
+
+;; CompletableFuture examples:
+
 user=> (deref (completable (Thread/sleep 5000) 42))
 42 ; produces 42 after 5 seconds
 user=> (deref (completable (Thread/sleep 5000) 42) 1000 13)
@@ -67,12 +105,6 @@ user=> (-> (completable (Thread/sleep 5000) 0)
 "java.lang.ArithmeticException: Divide by zero" ; produce "Divide by zero" after 5s
 user=>
 ```
-
-## Releases
-
-* 0.1.3 -- Jan 20, 2020 -- adds `local-map`.
-* 0.1.2 -- Jul 24, 2019 -- adds `completable`, `then`, `exceptionally`.
-* 0.1.1 -- Dec 05, 2018 -- first public release.
 
 ## License
 
