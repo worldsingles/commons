@@ -27,9 +27,6 @@ A local binding capturing macro:
 
 * `local-map` -- returns a hash map containing all local symbols (as keyword keys) with their associated values; note that this can include auto-generated locals too!
 
-``` clojure
-```
-
 In addition, some syntactic sugar for `java.util.concurrent.CompletableFuture`:
 
 * `completable` -- like `future` but produces a `CompletableFuture` instead.
