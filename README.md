@@ -75,7 +75,7 @@ user=> (defn foo [a b] ; a and b are also captured
            {:all (local-map)
             :a-d (local-map :only :a :d)
             :b-c (local-map :without :a :d)}))
-#'user/foo            
+#'user/foo
 user=> (foo 13 42))
 {:all {:a 13, :b 42, :c 1, :d 55}
  :a-d {:a 13, :d 55}
@@ -105,6 +105,6 @@ user=>
 
 ## License
 
-Copyright © 2016-2020 [World Singles Networks llc](https://worldsinglesnetworks.com/).
+Copyright © 2016-2021 [World Singles Networks llc](https://worldsinglesnetworks.com/).
 
 Distributed under the Eclipse Public License version 1.0.

@@ -4,6 +4,7 @@
 
 The following changes have been made on **master** since the 0.1.3 release:
 
+* Update `test-runner`.
 * Improve documentation for `local-map` (and add tests).
 * Add `.clj-kondo/config.edn`.
 * Split change log out from readme.

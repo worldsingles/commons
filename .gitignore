@@ -1,3 +1,4 @@
 /.cpcache
 *.jar
 /.clj-kondo/.cache
+/.lsp/sqlite.db
