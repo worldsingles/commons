@@ -1,8 +1,8 @@
+.calva/repl.calva-repl
+.nrepl-port
 *.jar
 /.clj-kondo/.cache
 /.cpcache
 /.lsp/.cache
 /.lsp/sqlite.db
 /.portal/vs-code.edn
-.nrepl-port
-.calva/repl.calva-repl

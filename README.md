@@ -7,13 +7,13 @@ Common utility functions and "extensions" to Clojure.
 `deps.edn`:
 
 ``` clojure
-clj -Sdeps '{:deps {worldsingles/ws-commons {:mvn/version "0.1.3"}}}'
+clj -Sdeps '{:deps {worldsingles/ws-commons {:mvn/version "0.1.4"}}}'
 ```
 
 Leiningen / Boot Dependency:
 
 ``` clojure
-[worldsingles/ws-commons "0.1.3"]
+[worldsingles/ws-commons "0.1.4"]
 ```
 
 * `condp->` -- an extension to `cond->` that threads the expression through the predicate(s) as well as the result(s).
@@ -76,7 +76,7 @@ user=> (defn foo [a b] ; a and b are also captured
             :a-d (local-map :only :a :d)
             :b-c (local-map :without :a :d)}))
 #'user/foo
-user=> (foo 13 42))
+user=> (foo 13 42)
 {:all {:a 13, :b 42, :c 1, :d 55}
  :a-d {:a 13, :d 55}
  :b-c {:b 42, :c 1}}
@@ -105,6 +105,6 @@ user=>
 
 ## License
 
-Copyright © 2016-2021 [World Singles Networks llc](https://worldsinglesnetworks.com/).
+Copyright © 2016-2024 [World Singles Networks llc](https://worldsinglesnetworks.com/).
 
 Distributed under the Eclipse Public License version 1.0.
