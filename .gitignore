@@ -6,3 +6,4 @@
 /.lsp/.cache
 /.lsp/sqlite.db
 /.portal/vs-code.edn
+/target
