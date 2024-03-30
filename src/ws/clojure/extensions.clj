@@ -1,4 +1,4 @@
-;; copyright (c) 2017-2020 world singles networks llc
+;; copyright (c) 2017-2024 world singles networks llc
 
 (ns ws.clojure.extensions
   "A small library of useful 'language extensions' -- things are 'like'
@@ -131,23 +131,21 @@
     (reify java.util.function.Supplier
       (~'get [_#] ~@body))))
 
-(defmacro then
+(defn then
   "Given a CompletableFuture and a function, when the future completes,
   invoke the function on its result."
-  [cf f]
-  `(.thenApply
-    ~cf
-    (reify java.util.function.Function
-      (~'apply [_# v#] (~f v#)))))
+  [^java.util.concurrent.CompletableFuture cf f]
+  (.thenApply cf
+              (reify java.util.function.Function
+                (apply [_ v] (f v)))))
 
-(defmacro exceptionally
+(defn exceptionally
   "Given a CompletableFuture and a function, if the future completes
   with an exception, invoke the function on that exception."
-  [cf f]
-  `(.exceptionally
-    ~cf
-    (reify java.util.function.Function
-      (~'apply [_# v#] (~f v#)))))
+  [^java.util.concurrent.CompletableFuture cf f]
+  (.exceptionally cf
+                  (reify java.util.function.Function
+                    (apply [_ v] (f v)))))
 
 (defmacro local-map
   "Turn all (or a subset of) locals into a hash map with keys named for

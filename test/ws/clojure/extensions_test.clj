@@ -1,11 +1,12 @@
-;; copyright (c) 2017-2020 world singles networks llc
+;; copyright (c) 2017-2024 world singles networks llc
 
 (ns ws.clojure.extensions-test
   "Tests for our 'Clojure language extension' functions."
   (:require [expectations.clojure.test
-             :refer [defexpect expect from-each in more-of]]
+             :refer [defexpect expect expecting from-each in more-of]]
             [ws.clojure.extensions
-             :refer [condp-> condp->> interleave-all local-map]]))
+             :refer [completable condp-> condp->> exceptionally interleave-all
+                     local-map then]]))
 
 (set! *warn-on-reflection* true)
 
@@ -66,3 +67,36 @@
            :a-d {:a 13, :d 55}
            :b-c {:b 42, :c 1}}
           (local-map-with-args 13 42)))
+
+(defn- add3 [cf] (then cf (fn [x] (+ x 3))))
+(defn- ->message [cf] (exceptionally cf ex-message))
+
+(defexpect completable-tests
+  (expecting "successful completion"
+    (expect 42 (-> (completable 21)
+                   (then (fn [x] (* x 2)))
+                   (deref)))
+    (let [cf (completable 10)]
+      (expect 13 (-> cf
+                     (then (fn [x] (+ x 3)))
+                     (deref))))
+    (let [cf (completable 10)]
+      (expect 13 (-> cf
+                     (add3)
+                     (deref)))))
+  (expecting "failed completion"
+    (expect 42
+            (-> (completable 21)
+                (then (fn [x] (/ x 0)))
+                (exceptionally (constantly 42))
+                (deref)))
+    (expect string?
+            (-> (completable 21)
+                (then (fn [x] (/ x 0)))
+                (exceptionally ex-message)
+                (deref)))
+    (expect string?
+            (-> (completable 21)
+                (then (fn [x] (/ x 0)))
+                (->message)
+                (deref)))))
