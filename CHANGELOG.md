@@ -2,6 +2,8 @@
 
 ## Releases
 
+* 0.1.x in progress
+  * Update dependencies.
 * 0.1.4 -- Mar 30, 2024
   * Add `CHANGELOG.md`.
   * Improve/add docs/tests for `local-map` and `completable` / `then` / `exceptionally`.
