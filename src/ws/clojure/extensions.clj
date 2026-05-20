@@ -1,4 +1,4 @@
-;; copyright (c) 2017-2024 world singles networks llc
+;; copyright (c) 2017-2026 world singles networks llc
 
 (ns ws.clojure.extensions
   "A small library of useful 'language extensions' -- things are 'like'

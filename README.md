@@ -21,7 +21,7 @@ Leiningen / Boot Dependency:
 * `condq` -- a version of `condp` that accepts a unary predicate and omits the `expr` (that `condp` uses as the second argument to the predicate).
 * `dissoc-all` -- an extension to `dissoc` that `dissoc`'s a sequence of keys.
 * `flip` -- a companion to `partial` that allows the first argument to be omitted (rather than the trailing arguments). Inspired by Haskell's `flip`.
-* `interleave-all` -- an extension to `interleave` that uses all elements of the longer sequence argument(s).")
+* `interleave-all` -- an extension to `interleave` that uses all elements of the longer sequence argument(s).
 
 A local binding capturing macro:
 
@@ -105,6 +105,6 @@ user=>
 
 ## License
 
-Copyright © 2016-2024 [World Singles Networks llc](https://worldsinglesnetworks.com/).
+Copyright © 2016-2026 [World Singles Networks llc](https://worldsinglesnetworks.com/).
 
 Distributed under the Eclipse Public License version 1.0.

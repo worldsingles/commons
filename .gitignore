@@ -1,3 +1,4 @@
+.calva/mcp-server/port
 .calva/repl.calva-repl
 .nrepl-port
 *.jar
